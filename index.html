@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menopause Awareness Campaign</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Roboto', sans-serif;
+background:linear-gradient(180deg,#ffe6ec,#ffc2d1,#ff9eb5);
+color: #5b0032;
+line-height:1.7;
+overflow-x:hidden;
+font-size:18px;   
+}
+
+h1,h2,h3{
+font-family:'Montserrat', sans-serif;
+color: #3a0018;
+}
+
+p{
+margin-bottom:20px;
+}
+
+/* NAVIGATION */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+position:sticky;
+top:0;
+backdrop-filter:blur(12px);
+background:rgba(255,255,255,0.2);
+z-index:1000;
+}
+
+.logo img{
+width:140px;
+animation:0;
+cursor:pointer;
+}
+
+@keyframes floatLogo{
+from{transform:translateY(0);}
+to{transform:translateY(6px);}
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:35px;
+align-items:center;
+}
+
+nav a{
+text-decoration:none;
+color:#000;
+font-weight:500;
+position:relative;
+transition:0.3s;
+cursor:pointer;
+display:flex;
+align-items:center;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+width:0%;
+height:2px;
+background:#000;
+left:0;
+bottom:-5px;
+transition:0.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+/* DROPDOWN */
+.dropdown{
+position:relative;
+}
+
+.dropdown-content{
+position:absolute;
+top:100%;
+right:0;
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.4);
+padding:12px 30px;
+border-radius:14px;
+box-shadow:0 8px 30px rgba(0,0,0,0.08);
+overflow:hidden;
+max-height:0;
+opacity:0;
+transform:translateY(-10px);
+transition:all 0.4s ease;
+min-width:260px;
+}
+
+.dropdown-content a{
+display:block;
+padding:10px 0;
+color:#000;
+}
+
+.dropdown-content.show{
+max-height:500px;
+opacity:1;
+transform:translateY(0);
+}
+
+#arrow{
+display:inline-block;
+transition:transform 0.4s ease;
+}
+
+.rotate{
+transform:rotate(180deg);
+}
+
+/* SECTIONS */
+section{
+padding:70px 10%;
+}
+
+/* HERO */
+.full-width-image{
+width:100%;
+margin:0;
+padding:0;
+}
+
+.full-width-image img{
+width:100%;
+height:520px;
+object-fit:cover;
+display:block;
+}
+
+/* ALTERNATING LAYOUT */
+.side-layout{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:80px;
+}
+
+.side-layout.reverse{
+flex-direction:row-reverse;
+}
+
+.text-block{
+flex:0 0 60%;
+}
+
+.side-layout img{
+width:100%;
+max-width:400px;
+height:auto;
+object-fit:contain;
+}
+
+/* CAMPAIGN */
+.campaign{
+background:rgba(255,255,255,0.3);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.3);
+border-radius:25px;
+padding:40px;
+margin-top:60px;
+box-shadow:0 15px 35px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.campaign:hover{
+transform:scale(1.02);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+nav{
+  padding:12px 5%;
+}
+
+nav ul{
+  gap:18px;
+}
+
+.logo img{
+  width:100px;
+}
+
+nav a{
+  font-size:14px;
+}
+
+.logo img{
+width:120px;
+}
+
+.full-width-image img{
+height:60vh;
+  min-height:  300px;
+}
+
+section{
+padding:50px 7%;
+}
+
+.side-layout{
+flex-direction:column;
+text-align:center;
+}
+
+.side-layout.reverse{
+flex-direction:column;
+}
+
+}
+#symptoms{
+padding:80px 10%;
+}
+
+#symptoms h2{
+text-align:center;
+margin-bottom:50px;
+font-size:32px;
+}
+
+/* Grid Layout */
+.symptoms-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:100px;
+justify-items:center;
+}
+
+/* Flip Card Container */
+.flip-card{
+width:200px;
+height:220px;
+perspective:1000px;
+cursor:pointer;
+}
+
+/* Inner Flip Animation */
+.flip-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform 0.6s ease;
+transform-style:preserve-3d;
+}
+
+.flip-card.active .flip-inner{
+transform:rotateY(180deg);
+}
+
+/* Front & Back Common Styles */
+.flip-front,
+.flip-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+background:rgba(255,255,255,0.35);
+backdrop-filter:blur(18px);
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+/* Hover Effect */
+.flip-card:hover .flip-front{
+transform:scale(1.05);
+}
+
+/* Front Side */
+.flip-front{
+flex-direction:column;
+font-weight:600;
+font-size:16px;
+}
+
+/* Back Side */
+.flip-back{
+transform:rotateY(180deg);
+font-size:14px;
+line-height:1.5;
+}
+
+/* PNG Icon Styling */
+.card-icon{
+width: 200px;
+height:160px;
+object-fit:contain;
+margin-bottom:0px;
+}
+
+/* Mobile Responsive */
+@media(max-width:768px){
+
+
+
+.symptoms-container{
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:20px;
+}
+
+.flip-card{
+width:160px;
+height:190px;
+}
+
+.card-icon{
+width:50px;
+height:50px;
+}
+
+}
+
+.stats-panel{
+  margin-top:60px;
+  padding:70px 60px; /* Increased vertical size */
+  border-radius:30px;
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(25px);
+  border:1px solid rgba(255,255,255,0.4);
+  box-shadow:0 20px 50px rgba(0,0,0,0.1);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:40px;
+
+ width:100%;
+max-width:1100px;
+margin:100px auto 0 auto; /* centers horizontally */
+.stat-item{
+  min-width:200px;
+}
+}
+
+/* Each Stat Column */
+.stat-item{
+  flex:1;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* Icon on top */
+.stat-icon{
+  width:70px;
+  height:70px;
+  object-fit:contain;
+  margin-bottom:15px;
+}
+
+/* Percentage */
+.stat-item h2{
+  font-size:38px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+/* Text below */
+.stat-item p{
+  font-size:14px;
+  max-width:250px;
+  line-height:1.5;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .stats-panel{
+    flex-direction:column;
+    padding:60px 30px;
+  }
+
+  .stat-item{
+    margin-bottom:30px;
+  }
+}
+
+/* Each Row */
+.stat-row{
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+/* Icon */
+.stat-icon{
+  width:100px;
+  height:100px;
+  object-fit:contain;
+}
+
+/* Text Area */
+.stat-content h2{
+  font-size:38px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.stat-content p{
+  font-size:15px;
+  max-width:500px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .stat-row{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .stat-content h2{
+    font-size:32px;
+  }
+}
+
+.intro-section{
+  position:relative;
+  padding:120px 10%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:left;
+  overflow:hidden;
+}
+
+.intro-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("intro.png") no-repeat center 10%;
+  background-size:700px;
+  opacity:0.20;
+  z-index:0;
+}
+
+.intro-section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,0.4);
+  z-index:0;
+}
+
+.intro-content{
+  position:relative;
+  max-width:900px;
+  z-index:1;
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<a href="#home" class="logo">
+<img src="who.png" alt="Logo">
+</a>
+
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#symptoms">Symptoms</a></li>
+<li><a href="#precautions">Precautions</a></li>
+
+<li class="dropdown">
+<a id="dropdownBtn">
+Menopause <span id="arrow">▼</span>
+</a>
+<div class="dropdown-content" id="dropdownMenu">
+<a href="#peri">Perimenopause</a>
+<a href="#meno">Menopause</a>
+<a href="#post">Post Menopause</a>
+<a href="#help">Menopause Help</a>
+<a href="#therapy">Menopause Therapy</a>
+</div>
+</li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<div class="full-width-image">
+<img src="webgif.gif">
+</div>
+
+<!-- HOME -->
+<section id="home" class="intro-section">
+<div class="intro-content">
+
+<h1>Introduction</h1>
+<p>Menopause is a natural biological phase in a woman’s life when 
+monthly periods permanently stop. 
+It usually happens between the age of 45–55 years. 
+Marking the end of a woman's reproductive years due to declining ovarian hormone 
+production, primarily estrogen, typically around age 51 but varying 
+from 45-55, involving stages like Perimenopause (transition with 
+irregular periods, hot flashes, mood swings), Menopause (the specific 
+moment of final period), and Postmenopause (years after, with 
+potential long-term risks like osteoporosis and heart disease).</p>
+<p> <b>Menopause is not a disease, it is a transition in life. </b> </p>
+<p> All women experience changes to their bodies as they age. 
+You probably remember the first big biological change, marked by the 
+arrival of your first period. This is the only easy-to-identify external 
+sign that you’ve formally entered into reproductive aging, technically 
+termed “menarche”. 
+We are all growing older every day, but many women don’t realize 
+that medically, there is a reproductive clock that ticks alongside, but 
+not always in sync with, their biological clock (despite the common 
+use of ‘the biological clock’ indicating how much time a woman has 
+left to bear children). It is this reproductive aging process that determines when you enter 
+into perimenopause, menopause and finally, settle into post
+menopausal life. </p> <p> <b> Stages of Menopause : </b> </p>
+
+<!-- FINAL HORIZONTAL GLASS STATS PANEL -->
+<div class="stats-panel">
+
+  <div class="stat-item">
+    <img src="stats1.png" alt="Uninformed women icon" class="stat-icon">
+    <h2 class="counter" data-target="49">0%</h2>
+    <p>Women are uninformed about premenopause/menopause</p>
+  </div>
+
+  <div class="stat-item">
+    <img src="stats2.png" alt="Insomnia icon" class="stat-icon">
+    <h2 class="counter" data-target="59">0%</h2>
+    <p>Women experience insomnia during perimenopause/menopause</p>
+  </div>
+
+  <div class="stat-item">
+    <img src="stats3.png" alt="Therapy icon" class="stat-icon">
+    <h2 class="counter" data-target="80">0%</h2>
+    <p>Women do not seek therapy of any kind for menopause</p>
+  </div>
+
+</div>
+</section>
+
+<!-- PERI (Left Image) -->
+<section id="peri">
+<div class="side-layout reverse">
+<div class="text-block">
+<h2>Perimenopause</h2>
+<p>Perimenopause is the time before menopause when your body is 
+getting ready to stop having periods. Perimenopause is sometimes called the menopausal transition.
+Women start perimenopause at different ages. You may notice signs,
+such as your periods becoming irregular, sometime in your 40s. 
+But some women notice changes as early as their 30s or as late as their 50s.
+During perimenopause, estrogen the main female hormone in your body rises and falls. 
+Your periods may get longer or shorter. You also may have symptoms such as hot flashes, trouble sleeping and vaginal dryness.
+Once you've gone 12 months in a row without a menstrual period, you've reached menopause 
+and perimenopause is over.</p> During perimenopause, you may notice changes in your body. You might have, <b> Irregular periods, Sleep problems, Mood changes, Vaginal and bladder problems, 
+Decreasing fertility, Loss of bone, Changing cholesterol levels. </b> </p>
+</div>
+<img src="11.png">
+</div>
+</section>
+
+<!-- MENOPAUSE (Right Image) -->
+<section id="meno">
+<div class="side-layout">
+<div class="text-block">
+<h2>Menopause</h2>
+<p>The transition into menopause usually starts with changes in women’s menstrual cycle patterns, often accompanied by 
+hot flashes or other symptoms. Most women begin the menopausal transition between ages 45 and 55, and the process may 
+last for several years. Women reach menopause at different ages, and the average age of menopause is 51.
+You will only know that you’ve reached menopause when you have not had a period or spotting for a full year.
+During the menopausal transition, the body’s production of estrogen and progesterone,
+declines greatly. Changes in these hormones may explain the symptoms that some women experience during this time.
+Symptoms related to menopause can last for between two and eight years, though the timing and symptoms are 
+highly variable among women. These factors are likely influenced by a woman’s genetics as well as external factors, 
+such as race and ethnicity, culture, lifestyle, and environment. 
+During transition the distribution of fat in the body changes, and women may gain weight more easily. They may also experience changes in their bone density, heart health, 
+body shape and composition, or physical function. Menopause symptoms result from falling hormone levels (estrogen and progesterone),
+typically causing irregular periods, hot flashes, night sweats, sleep disruptions, and mood changes.
+Other common symptoms include vaginal dryness, lower libido, weight gain, thinning hair, and memory "brain fog". These symptoms
+ Not all women will experience menopausal symptoms when they go through the menopause, up to 80-90% will have some
+symptoms, with 25% describing them as severe and debilitating. The most common symptoms are hot flushes and night sweats (vasomotor symptoms)
+, experienced by 70-80% of women.  </p>
+</div>
+<img src="meno.png">
+</div>
+</section>
+
+<!-- POST (Left Image) -->
+<section id="post">
+<div class="side-layout reverse">
+<div class="text-block">
+<h2>Post Menopause</h2>
+<p>Postmenopause is a term to describe the time after you’ve gone through menopause. 
+When you’re in postmenopause (or postmenopausal), your menstrual period has been gone for longer than 12 consecutive months.
+At this stage in life, your reproductive years are behind you and you’re no longer ovulating (or releasing eggs). Uncomfortable symptoms of menopause 
+like hot flashes and night sweats may become milder or go away completely in postmenopause. People in postmenopause are at an increased risk for 
+osteoporosis because their bodies don’t make a lot of estrogen, which is essential for maintaining strong and healthy bones. <br> You lose
+ bone density more rapidly after menopause due to decreased levels of estrogen. You can lose 25% of your bone density or more after menopause
+(approximately 1% to 2% per year). <br> People in postmenopause may experience moodiness, anxiety and depression. Things like stress,
+  sexual tension or other life challenges can cause mental health disruptions. Hormone levels can also affect your mood. It might help to talk with a therapist or 
+  counselor about what you’re feeling to see if they can offer ways to cope with this new phase of your life. After transitioning through menopause many doctors
+    recommends various types of therapy to ease symptoms and prevent or manage ongoing conditions that may happen with aging which includes <b>Menopause Hormone Therapy,
+     Coping Methods for Menopause, Exercise & Fitness, Non-Hormone Medications, Menopause Supplements, Naturopathic Therapy, Talk Therapy, Music Therapy, etc. </b> </p>
+</div>
+<img src="7.png">
+</div>
+</section>
+
+<!-- HELP (Right Image) -->
+<section id="help">
+<div class="side-layout">
+<div class="text-block">
+<h2>Menopause Help</h2>
+<p>Regular exercise, a balanced diet rich in calcium and protein, good sleep habits, 
+    and stress management can greatly help during menopause. Medical options like hormone replacement therapy (HRT), music therapy 
+    or medicines may reduce hot flashes and mood swings, while supplements such as calcium and vitamin
+ D support bone health. Staying hydrated, limiting caffeine and spicy foods, and seeking emotional support from family, friends, 
+     or counseling can also make this phase more comfortable and manageable</p>
+</div>
+<img src="12.png">
+</div>
+</section>
+
+<!-- THERAPY (Left Image) -->
+<section id="therapy">
+<div class="side-layout reverse">
+<div class="text-block">
+<h2>Menopause Therapy</h2>
+<p>There are various therapies to help ease the symptoms of menopause, such as Hormone Replacement Therapy (HRT), Systemic Estrogen Therapy
+    , Vaginal (Local) Estrogen Therapy, 
+    Non-Hormonal Medications, Lifestyle Therapy, 
+    Cognitive Behavioral Therapy (CBT), Bone Protection Therapy,
+Music therapy, Talk therapy, Nutritional therapy and much more but consult a good doctor with a keen knowledge about these therapies and about menopause.
+</p>
+</div>
+<img src="therapy.png">
+</div>
+</section>
+
+<section id="symptoms">
+<h2 style="text-align:center; margin-bottom:40px;">Menopause Symptoms</h2>
+
+<div class="symptoms-container">
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="hot.png" class="card-icon">
+Hot Flashes
+</div>
+<div class="flip-back">
+Sudden heat in face, neck and chest. May cause sweating and redness.
+</div>
+</div>
+</div>
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="11.png" class="card-icon">
+Night Sweats
+</div>
+<div class="flip-back">
+Heavy sweating during sleep that disturbs rest.
+</div>
+</div>
+</div>
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="4.png" class="card-icon">
+Irregular periods
+</div>
+<div class="flip-back">
+Periods become lighter, heavier or unpredictable.
+</div>
+</div>
+</div>
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="10.png" class="card-icon">
+Mood Swings
+</div>
+<div class="flip-back">
+Irritability, anxiety or sudden emotional shifts.
+</div>
+</div>
+</div>
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="3.png" class="card-icon">
+Sleep Problems
+</div>
+<div class="flip-back">
+Trouble falling asleep or waking up often.
+</div>
+</div>
+</div>
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="5.png" class="card-icon">
+Vaginal Dryness
+</div>
+<div class="flip-back">
+Dryness and discomfort due to lower estrogen.
+</div>
+</div>
+</div>
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="14.png" class="card-icon">
+Weight Gain
+</div>
+<div class="flip-back">
+Slower metabolism may increase abdominal fat.
+</div>
+</div>
+</div>
+
+<div class="flip-card" onclick="this.classList.toggle('active')">
+<div class="flip-inner">
+<div class="flip-front">
+<img src="2.png" class="card-icon">
+Brain Fog
+</div>
+<div class="flip-back">
+Memory lapses and difficulty concentrating.
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="precautions">
+<h2>Precautions</h2>
+<p>Maintain a balanced diet
+Good nutrition is a essential for managing menopause symptoms. Foods to include in your diet are:
+<br><b>Fruits and vegetables :</b> These are full of the vitamins, minerals, and antioxidants your body needs.
+<br><b>Fibre-rich foods and calcium & vitamin D :</b> High-fibre foods like leafy greens, kidney beans, and whole grains, dairy products, omega-3 fatty acids are 
+    good sources of nutrition.
+    <br><b>Stay active :</b>
+As your body changes, regular movement can help you stay healthy and strengthen your bones, boost your mood, and counter symptoms such as weight gain. 
+<br><b>Cardio :</b> Cardio include endurance activities that encourage you to use your large muscles.
+<br><b>Strength training :</b> Lifting dumbbells or using weight machines can help strengthen your muscles and bones, while also reducing body fat.
+<br><b>Yoga :</b> Yoga is a source of targeted symptom relief, 
+helping relax the body. Paired with meditation or breathing exercises, these can also prompt relaxation and mindfulness.
+<br> Keeping your mental health in check also helps a lot with menopause. <br> <b>Avoid Fatty meats & processed foods, alcohol, Caffeine </b> 
+as these can worsen the symptoms caused by menopause</p>
+</section>
+
+<section>
+<div class="campaign">
+<h2>Point of This Campaign</h2>
+<p>Menopause is one of the most overlooked and misunderstood phases of the human body. 
+    It is an extremely important transition in the life of every woman which mostly occurs around mid 40s. 
+    At the same time it is also important for younger individuals to understand more about menopause and its effects on the body. 
+    This campaign was created to shed some light and educate as many people as possible about menopause and it's various stages. 
+    By doing so individuals who are unaware will gain a better understanding of this transition and become more socially conscious about it. 
+    As shown in the website, a nealry half of the women going through menopause transition have very little knowledge about pre menopause or menopause in general. 
+    So campaigns like this are needed to spread awareness about it. The goal is not only to support women who are currently experiencing or 
+    will experience menopause in the future but also to educate society as a whole so that menopause is better understood, accepted, and openly discussed.</p>
+</div>
+</section>
+
+<script>
+const dropdownBtn = document.getElementById("dropdownBtn");
+const dropdownMenu = document.getElementById("dropdownMenu");
+const arrow = document.getElementById("arrow");
+
+dropdownBtn.addEventListener("click", function(e){
+e.stopPropagation();
+dropdownMenu.classList.toggle("show");
+arrow.classList.toggle("rotate");
+});
+
+document.addEventListener("click", function(){
+dropdownMenu.classList.remove("show");
+arrow.classList.remove("rotate");
+});
+
+function toggleRead() {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btn = event.target;
+
+    if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        moreText.style.display = "none";
+        btn.innerHTML = "Read more";
+    } else {
+        dots.style.display = "none";
+        moreText.style.display = "inline";
+        btn.innerHTML = "Read less";
+    }
+}
+
+const counters = document.querySelectorAll('.counter');
+let hasAnimated = false;
+
+function startCounter() {
+  const statsPanel = document.querySelector('.stats-panel');
+  const panelTop = statsPanel.getBoundingClientRect().top;
+  const screenHeight = window.innerHeight;
+
+  if (panelTop < screenHeight - 100 && !hasAnimated) {
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      let count = 0;
+      const speed = target / 60;
+
+      const updateCount = () => {
+        if (count < target) {
+          count += speed;
+          counter.innerText = Math.ceil(count) + "%";
+          requestAnimationFrame(updateCount);
+        } else {
+          counter.innerText = target + "%";
+        }
+      };
+
+      updateCount();
+    });
+
+    hasAnimated = true;
+  }
+}
+
+window.addEventListener('scroll', startCounter);
+
+</script>
+
+</body>
+</html>
